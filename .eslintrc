@@ -1,0 +1,42 @@
+{
+    "extends": "google",
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "rules": {
+        "max-len": [2, 100],
+        //检测分号
+        "semi": [2, "never"],
+        //function 括号前空格
+        "space-before-function-paren": [2, "always"],
+        //对象前空格
+        "object-curly-spacing": [2, "always"],
+        //检测注释
+        "require-jsdoc": 0,
+        //箭头函数参数为一个的时候
+        "arrow-parens": [2, "as-needed"],
+        //检测注释
+        "valid-jsdoc": [
+            0, {
+                "prefer": {"return": "returns"},
+                "requireParamDescription": false,
+                "requireReturnDescription": false
+            }
+        ],
+        "react/jsx-uses-react": [2],
+        "react/jsx-uses-vars": [2]
+//        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    },
+    "plugins": ["react"],
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true
+    },
+    "globals": {
+        "__DEV__": false
+    }
+}

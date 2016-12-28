@@ -1,2 +1,2 @@
-# react-ssr-starter
-react-ssr-starter
+# ssr
+ssr
