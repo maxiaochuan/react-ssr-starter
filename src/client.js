@@ -1,9 +1,11 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router'
+import { BrowserRouter } from 'react-router-dom'
 import ReactDOM from 'react-dom'
 import createRoutes from './routes'
 import { Provider } from 'react-redux'
 import makeStore from './store/createStore'
+
+console.log(BrowserRouter)
 
 // const { pathname, search, hash } = window.location
 // const location = `${pathname}${search}${hash}`
@@ -14,13 +16,13 @@ const MOUNT_NODE = document.getElementById('root')
 const store = makeStore(initialState)
 
 let onRenderComplete = function initialRenderComplete () {
-  let elem = document.getElementById('css')
-  if (elem) {
-    elem.parentNode.removeChild(elem)
-  }
-  onRenderComplete = function renderComplete () {
-    // document.title = route.title
-  }
+  // let elem = document.getElementById('css')
+  // if (elem) {
+  //   elem.parentNode.removeChild(elem)
+  // }
+  // onRenderComplete = function renderComplete () {
+  //   // document.title = route.title
+  // }
 }
 
 let renderProps = {

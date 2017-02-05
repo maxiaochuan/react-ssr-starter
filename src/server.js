@@ -5,7 +5,7 @@
 import 'babel-polyfill'
 import express from 'express'
 import React from 'react'
-import { ServerRouter, createServerRenderContext } from 'react-router'
+import { StaticRouter } from 'react-router'
 import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom/server'
 import path from 'path'
@@ -30,8 +30,9 @@ app.get('/api/number', function (req, res) {
 app.get('*', async (req, res, next) => {
   // first create a context for <ServerRouter>, it's where we keep the
   // results of rendering for the second pass if necessary
-  const context = createServerRenderContext()
+  // const context = createServerRenderContext()
   // const css = new Set()
+  const context = {}
   const props = {}
   // props.onInsertCss = (...styles) => styles.forEach(style => {
   //   css.add(style._getCss())
@@ -47,25 +48,30 @@ app.get('*', async (req, res, next) => {
   const store = makeStore(initialState)
 
   // render the first time
+  // let markup = ReactDOM.renderToString(
+  //   <Provider store={store}>
+  //     <StaticRouter
+  //       location={req.url}
+  //       context={context}
+  //     >
+  //       createRoutes(props)
+  //     </StaticRouter>
+  //   </Provider>
+  // )
   let markup = ReactDOM.renderToString(
-    <Provider store={store}>
-      <ServerRouter
-        location={req.url}
-        context={context}
-      >
-        {createRoutes(props)}
-      </ServerRouter>
-    </Provider>
+    <StaticRouter location={req.url} context={context}>
+      {createRoutes(props)}
+    </StaticRouter>
   )
 
   // get the result
-  const result = context.getResult()
+  // const result = context.getResult()
 
   // the result will tell you if it redirected, if so, we ignore
   // the markup and send a proper redirect.
-  if (result.redirect) {
-    res.writeHead(301, {
-      Location: result.redirect.pathname,
+  if (context.url) {
+    res.writeHead(302, {
+      Location: result.context.url,
     })
     res.end()
   } else {
@@ -73,19 +79,19 @@ app.get('*', async (req, res, next) => {
     // we can send a 404 and then do a second render pass with
     // the context to clue the <Miss> components into rendering
     // this time (on the client they know from componentDidMount)
-    if (result.missed) {
-      res.writeHead(404)
-      markup = ReactDOM.renderToString(
-        <Provider store={store}>
-          <ServerRouter
-            location={req.url}
-            context={context}
-          >
-            {createRoutes(props)}
-          </ServerRouter>
-        </Provider>
-      )
-    }
+    // if (result.missed) {
+    //   res.writeHead(404)
+    //   markup = ReactDOM.renderToString(
+    //     <Provider store={store}>
+    //       <ServerRouter
+    //         location={req.url}
+    //         context={context}
+    //       >
+    //         {createRoutes(props)}
+    //       </ServerRouter>
+    //     </Provider>
+    //   )
+    // }
     const data = {}
     // data.style = [...css].join('')
     data.children = markup

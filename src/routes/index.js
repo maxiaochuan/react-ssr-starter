@@ -4,22 +4,26 @@ import HomeContainer from './Home'
 import NumberContainer from './Number'
 import WelcomeContainer from './Welcome'
 import App from '../components/App'
-import Match from 'react-router/Match'
+import { Route } from 'react-router-dom'
 // import MatchAsync from '../components/MatchAsync'
+
+const Com = () => <h1>h1</h1>
 
 const routeMap = [
   {
-    pattern: '/',
-    exactly: true,
+    path: '/',
+    exact: true,
     component: HomeContainer,
   },
   {
-    pattern: 'number',
-    component: NumberContainer,
+    path: 'number',
+    // component: NumberContainer,
+    component: Com,
   },
   {
-    pattern: 'welcome',
-    component: WelcomeContainer,
+    path: 'welcome',
+    // component: WelcomeContainer,
+    component: Com,
   },
 ]
 
@@ -51,7 +55,7 @@ const routeMap = [
 
 export default props => (
   <App {...props}>
-    {routeMap.map((route, i) => (<Match key={i} {...route}/>))}
+    {routeMap.map((route, i) => (<Route key={i} {...route}/>))}
     {/* !process.env.BROWSER ? null : asyncRouteMap.map((route, i) =>
       (<Match key={i} {...route}/>)) */}
   </App>

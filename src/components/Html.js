@@ -18,7 +18,7 @@ class Html extends Component {
           <title></title>
           <link rel="icon" href="/favicon.ico" type="image/x-icon" />
           <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-          {styles && styles.map(style => <link href={style} rel="stylesheet" />)}
+          {styles && styles.map(style => <link key={style} href={style} rel="stylesheet" />)}
         </head>
         <body>
           <div id="root" dangerouslySetInnerHTML={{ __html: children }} />
