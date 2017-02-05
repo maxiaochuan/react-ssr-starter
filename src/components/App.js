@@ -9,17 +9,17 @@ import React, { Component, PropTypes } from 'react'
 
 class App extends Component {
 
-  static propTypes = {
-    onInsertCss: PropTypes.func.isRequired,
-  }
-
-  static childContextTypes = {
-    insertCss: PropTypes.func.isRequired,
-  }
-
-  getChildContext () {
-    return { insertCss: this.props.onInsertCss }
-  }
+  // static propTypes = {
+  //   onInsertCss: PropTypes.func.isRequired,
+  // }
+  //
+  // static childContextTypes = {
+  //   insertCss: PropTypes.func.isRequired,
+  // }
+  //
+  // getChildContext () {
+  //   return { insertCss: this.props.onInsertCss }
+  // }
 
   render () {
     return (<div>{this.props.children}</div>)

@@ -29,7 +29,7 @@ class MatchAsync extends Component {
   render () {
     return (
       <Match render={matchProps => {
-          const { component, getComponent } = this.props
+          const { component, getComponent } = this
           if(component === undefined) {
             getComponent()
           }

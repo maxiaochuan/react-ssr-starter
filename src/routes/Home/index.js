@@ -1,11 +1,12 @@
 'use strict'
 import React, { Component, PropTypes } from 'react'
-import withStyles from 'isomorphic-style-loader/lib/withStyles'
+// import withStyles from 'isomorphic-style-loader/lib/withStyles'
 import { Link } from 'react-router'
 import s from './Home.css'
 
 class HomeContainer extends Component {
   render () {
+    console.log(s)
     return (
       <div className={s.home}>
         <h1>Home 123</h1>
@@ -15,5 +16,5 @@ class HomeContainer extends Component {
   }
 }
 
-export default withStyles(s)(HomeContainer)
-// export default HomeContainer
+// export default withStyles(s)(HomeContainer)
+export default HomeContainer

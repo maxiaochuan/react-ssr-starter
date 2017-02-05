@@ -55,7 +55,7 @@
     "react-router": "^4.0.0-alpha.6",
     "redux": "^3.6.0",
     "source-map-support": "^0.4.6",
-    "webpack": "^2.2.0-rc.1",
+    "webpack": "^2.2.1",
     "webpack-merge": "^2.0.0"
   },
   "devDependencies": {
@@ -66,6 +66,7 @@
     "eslint": "^3.12.2",
     "eslint-config-google": "^0.7.1",
     "eslint-plugin-react": "^6.8.0",
+    "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "fs-extra": "^1.0.0",
     "isomorphic-style-loader": "^1.1.0",
     "mkdirp": "^0.5.1",

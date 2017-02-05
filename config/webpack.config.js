@@ -2,6 +2,7 @@
 import path from 'path'
 import webpack from 'webpack'
 import AssetsPlugin from 'assets-webpack-plugin'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import merge from 'webpack-merge'
 
 const NODE_ENV = process.env.NODE_ENV
@@ -41,24 +42,45 @@ const config = {
         ],
       },
       {
-        test: /.css$/,
-        use: [
-          'isomorphic-style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              sourceMap: isDebug,
-              localIdentName: isDebug ? '[name]-[local]-[hash:base64:5]' : '[hash:base64:5]',
-              minimize: !isDebug,
-              discardComments: { removeAll: true },
-              // importLoaders: 1,
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                sourceMap: isDebug,
+                minimize: !isDebug,
+                localIdentName: isDebug ? '[name]-[local]-[hash:base64:5]' : '[hash:base64:5]',
+              },
             },
-          },
-        ],
+          ],
+        }),
       },
+      // {
+      //   test: /.css$/,
+      //   use: [
+      //     'isomorphic-style-loader',
+      //     {
+      //       loader: 'css-loader',
+      //       options: {
+      //         modules: true,
+      //         sourceMap: isDebug,
+      //         localIdentName: isDebug ? '[name]-[local]-[hash:base64:5]' : '[hash:base64:5]',
+      //         minimize: !isDebug,
+      //         discardComments: { removeAll: true },
+      //         // importLoaders: 1,
+      //       },
+      //     },
+      //   ],
+      // },
     ],
   },
+
+  plugins: [
+     new ExtractTextPlugin('styles.css'),
+  ],
 
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.css', 'scss'],
@@ -138,7 +160,7 @@ const clientConfig = merge(config, {
       }),
     ] : [
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin(),
+      new webpack.NoEmitOnErrorsPlugin(),
       new webpack.NamedModulesPlugin(),
     ],
   ],

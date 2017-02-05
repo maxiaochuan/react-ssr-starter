@@ -31,11 +31,11 @@ app.get('*', async (req, res, next) => {
   // first create a context for <ServerRouter>, it's where we keep the
   // results of rendering for the second pass if necessary
   const context = createServerRenderContext()
-  const css = new Set()
+  // const css = new Set()
   const props = {}
-  props.onInsertCss = (...styles) => styles.forEach(style => {
-    css.add(style._getCss())
-  })
+  // props.onInsertCss = (...styles) => styles.forEach(style => {
+  //   css.add(style._getCss())
+  // })
 
   let initialState = {}
 
@@ -87,9 +87,10 @@ app.get('*', async (req, res, next) => {
       )
     }
     const data = {}
-    data.style = [...css].join('')
+    // data.style = [...css].join('')
     data.children = markup
     data.initialState = store.getState()
+    data.styles = [assets.client.css]
     data.scripts = [assets.manifest.js, assets.vendor.js, assets.client.js]
     const html = ReactDOM.renderToStaticMarkup(<Html {...data}></Html>)
     res.send(`<!doctype html>${html}`)
